@@ -39,9 +39,8 @@ class RetrieveRobarckoData extends Command
      */
     public function handle()
     {
-        //TODO put this in config file
-        $api_key    = '941742a6-3259-4ecc-9736-c8b784b6972e';
-        $api_link   = 'https://robarcko-webshop-api.azurewebsites.net/Api/Products/';
+        $api_key    = env('ROBARCKO_API_KEY');
+        $api_link   = env('ROBARCKO_API_LINK');
 
         $response = Http::withHeaders([
             'x-api-key' => $api_key,
