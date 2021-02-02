@@ -44,12 +44,11 @@ class RetrieveRobarckoData extends Command
 
         $response = Http::withHeaders([
             'x-api-key' => $api_key,
+            'Content-Type' => 'application/json; charset=utf-8'
         ])->get($api_link);
 
-        if ($response->successful()) {
-            $data = $response->body();
-
-            Storage::disk('local')->put('robarcko.txt', "\xEF\xBB\xBF" .$data);
+        if ( $response->successful() ) {
+            Storage::disk('suppliers')->put('robarcko/orignal.json', $response->body());
 
             //TODO
             //JUST INFORM AND SEND AN EMAIL RETRIEVED NEW ROBARCKO ITEMS

@@ -18,7 +18,7 @@ class FbCreateProductImagesTable extends Migration
 
             $table->foreignId('product_id');
 
-            $table->enum('type', ['diagram', 'image', 'tuning']);
+            $table->enum('type', ['diagram', 'image', 'turning']);
             $table->string('link');
 
             $table->timestamps();

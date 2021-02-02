@@ -16,10 +16,9 @@ class FbCreateProductReplacementsTable extends Migration
         Schema::create('fb_product_replacements', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('product_id');
-
-            $table->string('code');
-            $table->string('brand');
+            $table->unsignedBigInteger('product_id')->nullable();
+            $table->unsignedBigInteger('brand_id')->nullable();
+            $table->unsignedBigInteger('code_id')->nullable();
 
             $table->timestamps();
         });
