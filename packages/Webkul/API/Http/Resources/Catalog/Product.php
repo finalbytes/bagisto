@@ -4,6 +4,8 @@ namespace Webkul\API\Http\Resources\Catalog;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+use Webkul\Product\Facades\ProductImage as ProductImageFacade;
+
 class Product extends JsonResource
 {
     /**
@@ -48,8 +50,8 @@ class Product extends JsonResource
             'formated_price'         => core()->currency($productTypeInstance->getMinimalPrice()),
             'short_description'      => $product->short_description,
             'description'            => $product->description,
-            'images'                 => ProductImage::collection($product->images),
-            'base_image'             => $this->productImageHelper->getProductBaseImage($product),
+            'images'                 => ProductImageFacade::collection($product->images),
+            'base_image'             => ProductImageFacade::getProductBaseImage($product),
             'created_at'             => $product->created_at,
             'updated_at'             => $product->updated_at,
 
