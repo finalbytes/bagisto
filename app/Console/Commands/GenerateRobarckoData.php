@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\ProcessReplacement;
 use App\Product;
 use App\ProductBrand;
 use App\ProductCode;
 use App\ProductGroup;
 use App\ProductImage;
-use App\ProductReplacement;
 use App\ProductSupplier;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
@@ -131,7 +131,7 @@ class GenerateRobarckoData extends Command
                 'customer_price_code' => $item['KlantPrijsCode'],
                 'oem_number' => $item['OEMNummer'],
                 'power' => $item['Power'],
-                'price' => $this->calcPrice($item['Price']),
+                'price' => $this->calcPrice($item['Price']),    //we want calculated prizes
                 'price_old' => $item['Price'],
                 'features' => $item['ProductKenmerken'],
                 'pulley_details' => $item['PulleyDetails'],
@@ -173,30 +173,7 @@ class GenerateRobarckoData extends Command
             }
         }
 
-//        foreach ($item['Replacing'] AS $replace_item) {
-//
-//            $brand = ProductBrand::firstOrCreate([
-//                'name' => ($replace_item['Merk'] ?: 'Onbekend')
-//            ]);
-//
-//            $code = ProductCode::firstOrCreate([
-//                'name' => ($replace_item['Code'] ?: 'Onbekend')
-//            ]);
-//
-//            ProductReplacement::firstOrCreate([
-//                'product_id' => $product->id,
-//                'brand_id' => $brand->id,
-//                'code_id' => $code->id
-//            ]);
-//        }
-
-
-        dd($item);
-
-
-
-
-
+        ProcessReplacement::dispatch($product->id, $item['Replacing'])->onConnection('database');
     }
 
     private function calcPrice($price) {
