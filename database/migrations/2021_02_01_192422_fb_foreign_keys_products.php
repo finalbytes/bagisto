@@ -16,12 +16,9 @@ class FbForeignKeysProducts extends Migration
         Schema::table('fb_products', function (Blueprint $table) {
             $table->foreign('code_id')->references('id')->on('fb_product_codes');
             $table->foreign('group_id')->references('id')->on('fb_product_groups');
-            $table->foreign('mountedon_id')->references('id')->on('fb_product_brands');
+            $table->foreign('brand_id')->references('id')->on('fb_product_brands');
             $table->foreign('supplier_id')->references('id')->on('fb_product_suppliers');
             $table->foreign('replacement_for_id')->references('id')->on('fb_product_brands');
-
-
-
         });
 
         Schema::table('fb_product_images', function (Blueprint $table) {
@@ -30,6 +27,8 @@ class FbForeignKeysProducts extends Migration
 
         Schema::table('fb_product_replacements', function (Blueprint $table) {
             $table->foreign('product_id')->references('id')->on('fb_products');
+            $table->foreign('brand_id')->references('id')->on('fb_product_brands');
+            $table->foreign('code_id')->references('id')->on('fb_product_codes');
         });
     }
 
@@ -42,6 +41,8 @@ class FbForeignKeysProducts extends Migration
     {
         Schema::table('fb_product_replacements', function (Blueprint $table) {
             $table->dropForeign(['product_id']);
+            $table->dropForeign(['brand_id']);
+            $table->dropForeign(['code_id']);
         });
 
         Schema::table('fb_product_images', function (Blueprint $table) {
@@ -51,8 +52,9 @@ class FbForeignKeysProducts extends Migration
         Schema::table('fb_products', function (Blueprint $table) {
             $table->dropForeign(['code_id']);
             $table->dropForeign(['group_id']);
-            $table->dropForeign(['mountedon_id']);
+            $table->dropForeign(['brand_id']);
             $table->dropForeign(['supplier_id']);
+            $table->dropForeign(['replacement_for_id']);
         });
     }
 }

@@ -36,6 +36,10 @@ class Product extends Model
         'voltage'
     ];
 
+
+    protected $with = ['code', 'brand', 'group', 'supplier', 'images', 'replacements'];
+
+
     public function code()
     {
         return $this->belongsTo(ProductCode::class);
@@ -51,9 +55,9 @@ class Product extends Model
         return $this->belongsTo(ProductGroup::class);
     }
 
-    public function mounton()
+    public function brand()
     {
-        return $this->belongsTo(ProductMountOn::class);
+        return $this->belongsTo(ProductBrand::class);
     }
 
     public function images()

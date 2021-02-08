@@ -20,7 +20,7 @@ class FbCreateProductsTable extends Migration
 
             $table->unsignedBigInteger('code_id')->nullable();
             $table->unsignedBigInteger('group_id')->nullable();
-            $table->unsignedBigInteger('mountedon_id')->nullable();
+            $table->unsignedBigInteger('brand_id')->nullable();
             $table->unsignedBigInteger('supplier_id')->nullable();
             $table->unsignedBigInteger('replacement_for_id')->nullable();
 

@@ -14,6 +14,7 @@ class ProductReplacement extends Model
         'code_id'
     ];
 
+    protected $with = ['code', 'brand'];
 
 
     public function product()

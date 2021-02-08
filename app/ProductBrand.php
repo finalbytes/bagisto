@@ -12,12 +12,12 @@ class ProductBrand extends Model
 
 
 
-    public function productMountOns()
+    public function products()
     {
         return $this->hasMany(Product::class);
     }
 
-    public function productReplacements()
+    public function replacements()
     {
         return $this->hasMany(Product::class);
     }

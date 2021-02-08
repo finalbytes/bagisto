@@ -23,3 +23,7 @@ Route::get('/data', function() {
     echo json_last_error();
     dd($data);
 });
+
+
+Route::get('/demo', [\App\Http\Controllers\DemoController::class,'index']);
+Route::get('/demo1', [\App\Http\Controllers\DemoController::class,'search']);
